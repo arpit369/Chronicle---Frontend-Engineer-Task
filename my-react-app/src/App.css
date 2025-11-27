@@ -1,0 +1,810 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Chronicle Dark Theme Colors */
+:root {
+  --chronicle-dark-bg: #0a0a0a;
+  --chronicle-dark-surface: #1a1a1a;
+  --chronicle-dark-card: #252525;
+  --chronicle-text-primary: #ffffff;
+  --chronicle-text-secondary: rgba(255, 255, 255, 0.7);
+  --chronicle-border: rgba(255, 255, 255, 0.1);
+  --chronicle-button-white: #ffffff;
+  --chronicle-button-black: #000000;
+  --chronicle-hover: rgba(255, 255, 255, 0.05);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(ellipse at center top, #0f0f0f 0%, #0a0a0a 50%, #0a0a0a 100%);
+  color: var(--chronicle-text-primary);
+  min-height: 100vh;
+}
+
+.app-container {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at center top, #0f0f0f 0%, #0a0a0a 50%, #0a0a0a 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation Bar */
+.chronicle-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+  background: rgba(10, 10, 10, 0.8);
+  border-bottom: 1px solid var(--chronicle-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+}
+
+.nav-link {
+  color: var(--chronicle-text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: opacity 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  position: relative;
+}
+
+.chronicle-logo {
+  font-size: 1.5rem;
+  color: var(--chronicle-text-primary);
+  transform: rotate(45deg);
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* Gradient ball/glow below center of navbar - subtle vertical gradient effect */
+.chronicle-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 300px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.25) 15%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%
+  );
+  z-index: 101;
+  pointer-events: none;
+}
+
+/* Subtle radial glow around the gradient line - bigger diameter */
+.chronicle-nav::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse 200px 400px at center,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.02) 45%,
+    transparent 65%
+  );
+  z-index: 100;
+  pointer-events: none;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.nav-button {
+  background: transparent;
+  border: none;
+  color: var(--chronicle-text-primary);
+  font-size: 0.95rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  font-family: inherit;
+}
+
+.nav-button:hover {
+  opacity: 0.8;
+}
+
+.try-button {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.try-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 4rem 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--chronicle-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin: 0 0 2.5rem 0;
+  color: var(--chronicle-text-secondary);
+  font-weight: 400;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-button {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.hero-button.primary {
+  background: var(--chronicle-button-white);
+  color: var(--chronicle-button-black);
+}
+
+.hero-button.primary:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.hero-button.secondary {
+  background: var(--chronicle-button-black);
+  color: var(--chronicle-button-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-button.secondary:hover {
+  background: rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Editor Section */
+.editor-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  width: 100%;
+}
+
+.editor-container {
+  background: var(--chronicle-dark-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--chronicle-border);
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+/* Magical white gradient light effect when AI is writing */
+.editor-container.ai-writing {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.1) 75%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  background-size: 300% 300%;
+  animation: containerGradient 5s ease infinite;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(255, 255, 255, 0.15),
+    0 0 120px rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes containerGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes magicalGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.prosemirror-editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--chronicle-dark-card);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+/* Magical white glow effect on editor wrapper */
+.prosemirror-editor-wrapper.ai-writing-active {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  background-size: 100% 200%;
+  animation: wrapperGlow 3s ease infinite;
+  position: relative;
+}
+
+.prosemirror-editor-wrapper.ai-writing-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse 900px 700px at center,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.12) 25%,
+    rgba(255, 255, 255, 0.06) 45%,
+    transparent 65%
+  );
+  animation: pulseGlow 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 12px;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes wrapperGlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* Formatting Toolbar - Dark Theme */
+.formatting-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+  background: var(--chronicle-dark-surface);
+  border-bottom: 1px solid var(--chronicle-border);
+  border-radius: 12px 12px 0 0;
+  flex-wrap: wrap;
+}
+
+.toolbar-button {
+  background: transparent;
+  border: 1px solid var(--chronicle-border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--chronicle-text-primary);
+  transition: all 0.2s ease;
+  min-width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-button:hover {
+  background: var(--chronicle-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.toolbar-button.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--chronicle-text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.toolbar-button.active:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 24px;
+  background: var(--chronicle-border);
+  margin: 0 4px;
+}
+
+.toolbar-select {
+  padding: 6px 8px;
+  border: 1px solid var(--chronicle-border);
+  border-radius: 6px;
+  background: var(--chronicle-dark-surface);
+  color: var(--chronicle-text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 70px;
+  height: 32px;
+  font-family: inherit;
+}
+
+.toolbar-select:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--chronicle-hover);
+}
+
+.toolbar-select:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+/* ProseMirror Editor - Dark Theme */
+.prosemirror-editor {
+  flex: 1;
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: var(--chronicle-dark-card);
+  position: relative;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+/* Magical white background effect at cursor position when AI is writing */
+.prosemirror-editor.ai-writing-active {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.08) 75%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 200%;
+  animation: backgroundFlow 4s ease infinite;
+  position: relative;
+}
+
+.prosemirror-editor.ai-writing-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    ellipse 800px 600px at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  animation: pulseGlow 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.prosemirror-editor.ai-writing-active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle 400px at var(--cursor-x, 50%) var(--cursor-y, 50%),
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.25) 20%,
+    rgba(255, 255, 255, 0.15) 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 70%,
+    transparent 90%
+  );
+  animation: cursorGlow 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 0 0 12px 12px;
+  transition: background-position 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
+}
+
+@keyframes cursorGlow {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes backgroundFlow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.prosemirror-editor-content {
+  outline: none;
+  min-height: 400px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.prosemirror-editor-content .ProseMirror {
+  outline: none;
+  min-height: 400px;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--chronicle-text-primary);
+  background: transparent;
+  cursor: text;
+  position: relative;
+  z-index: 3;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Ensure formatted text displays correctly */
+.prosemirror-editor-content strong {
+  font-weight: 600;
+}
+
+.prosemirror-editor-content em {
+  font-style: italic;
+}
+
+.prosemirror-editor-content u {
+  text-decoration: underline;
+}
+
+/* Font size mark styling */
+.prosemirror-editor-content span[style*="font-size"] {
+  display: inline;
+}
+
+.prosemirror-editor-content .ProseMirror p {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+
+.prosemirror-editor-content .ProseMirror p:last-child {
+  margin-bottom: 0;
+}
+
+/* ProseMirror placeholder styling */
+.prosemirror-editor-content .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  height: 0;
+}
+
+.prosemirror-editor-content .ProseMirror:focus {
+  outline: none;
+}
+
+/* Controls Container */
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.continue-button {
+  background: var(--chronicle-button-white);
+  color: var(--chronicle-button-black);
+  border: none;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.continue-button:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.continue-button:active:not(.disabled) {
+  transform: translateY(0);
+}
+
+.continue-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.continue-button.loading {
+  cursor: wait;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-top-color: var(--chronicle-button-black);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  background: rgba(255, 59, 48, 0.15);
+  color: #ff6b6b;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  font-size: 0.95rem;
+  max-width: 500px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.error-message p {
+  margin: 0;
+}
+
+.retry-button {
+  background: var(--chronicle-button-white);
+  color: var(--chronicle-button-black);
+  border: none;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.retry-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+.retry-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Info Section */
+.info-section {
+  background: var(--chronicle-dark-surface);
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: var(--chronicle-text-secondary);
+  text-align: left;
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+  border: 1px solid var(--chronicle-border);
+}
+
+.info-text {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--chronicle-text-secondary);
+}
+
+.info-text strong {
+  font-weight: 600;
+  color: var(--chronicle-text-primary);
+}
+
+.info-text.warning {
+  color: #ff6b6b;
+}
+
+.info-text.warning strong {
+  color: #ff6b6b;
+}
+
+/* Scrollbar styling - Dark Theme */
+.prosemirror-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.prosemirror-editor::-webkit-scrollbar-track {
+  background: var(--chronicle-dark-surface);
+  border-radius: 4px;
+}
+
+.prosemirror-editor::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.prosemirror-editor::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chronicle-nav {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-left {
+    display: none; /* Hide nav links on mobile */
+  }
+
+  .nav-right {
+    gap: 0.5rem;
+  }
+
+  .nav-button {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem 2rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .editor-section {
+    padding: 0 1rem 1rem;
+  }
+
+  .prosemirror-editor {
+    font-size: 16px;
+    padding: 16px;
+    min-height: 300px;
+  }
+
+  .continue-button {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .chronicle-logo {
+    font-size: 1.2rem;
+  }
+}
